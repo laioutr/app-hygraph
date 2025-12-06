@@ -7,15 +7,19 @@ import { name, version } from '../package.json';
 /**
  * The options the module adds to the nuxt.config.ts.
  */
-export interface ModuleOptions {}
+export interface ModuleOptions {
+  contentApiUrl: string;
+  imageBaseUrl: string;
+  token: string;
+}
 
 /**
- * The config the module adds to nuxt.runtimeConfig.public['my-laioutr-app']
+ * The config the module adds to nuxt.runtimeConfig.public['@laioutr/app-hygraph']
  */
 export interface RuntimeConfigModulePublic {}
 
 /**
- * The config the module adds to nuxt.runtimeConfig['my-laioutr-app']
+ * The config the module adds to nuxt.runtimeConfig['@laioutr/app-hygraph']
  */
 export interface RuntimeConfigModulePrivate extends ModuleOptions {}
 
@@ -27,7 +31,7 @@ export default defineNuxtModule<ModuleOptions>({
   },
   // Default configuration options of the Nuxt module
   defaults: {},
-  async setup(_options, nuxt) {
+  async setup(options, nuxt) {
     const { resolve } = createResolver(import.meta.url);
     const resolveRuntimeModule = (path: string) => resolve('./runtime', path);
 
@@ -35,8 +39,21 @@ export default defineNuxtModule<ModuleOptions>({
 
     // Runtime configuration for this module
     // These two statements can be removed if you don't provide a runtime config
-    nuxt.options.runtimeConfig[name] = defu(nuxt.options.runtimeConfig[name] as Parameters<typeof defu>[0], _options);
-    nuxt.options.runtimeConfig.public[name] = defu(nuxt.options.runtimeConfig.public[name] as Parameters<typeof defu>[0], _options);
+    nuxt.options.runtimeConfig[name] = defu(nuxt.options.runtimeConfig[name] as Parameters<typeof defu>[0], options);
+
+    // Make app-assets publicly available
+    nuxt.options.nitro.publicAssets ??= [];
+    nuxt.options.nitro.publicAssets.push({
+      dir: resolveRuntimeModule('./app/public'),
+      maxAge: 60 * 60 * 24 * 7, // 7 days
+    });
+
+    // Configure Nuxt Image for Hygraph
+    nuxt.hook('laioutr:nuxtImageConfig' as any, (config: any) => {
+      config.hygraph = {
+        baseURL: options.imageBaseUrl,
+      };
+    });
 
     await registerLaioutrApp({
       name,
@@ -44,6 +61,7 @@ export default defineNuxtModule<ModuleOptions>({
       orchestrDirs: [resolveRuntimeModule('server/orchestr')],
       sections: [resolveRuntimeModule('app/sections')],
       blocks: [resolveRuntimeModule('app/blocks')],
+      mediaLibraryProviders: [resolveRuntimeModule('./server/media-library/hygraph')],
     });
 
     // Install peer-dependency modules only on prepare-step.

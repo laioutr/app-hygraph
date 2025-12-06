@@ -2,12 +2,12 @@
 Get your module up and running quickly.
 
 Find and replace all on all files (CMD+SHIFT+F):
-- Name: My Laioutr App
-- Package name: my-laioutr-app
-- Description: My new Laioutr App
+- Name: Hygraph Laioutr
+- Package name: @laioutr/app-hygraph
+- Description: Laioutr Hygraph App
 -->
 
-# My Laioutr App
+# Hygraph Laioutr
 
 [![Laioutr][laioutr-src]][laioutr-href]
 [![npm version][npm-version-src]][npm-version-href]
@@ -20,7 +20,7 @@ My new [Laioutr](https://laioutr.com) App for doing amazing things using Nuxt.
 See [laioutr.com](https://laioutr.com) for more information about Laioutr.
 
 - [✨ &nbsp;Release Notes](/CHANGELOG.md)
-  <!-- - [🏀 Online playground](https://stackblitz.com/github/your-org/my-laioutr-app?file=playground%2Fapp.vue) -->
+  <!-- - [🏀 Online playground](https://stackblitz.com/github/your-org/@laioutr/app-hygraph?file=playground%2Fapp.vue) -->
   <!-- - [📖 &nbsp;Documentation](https://example.com) -->
 
 ## Features
@@ -40,7 +40,7 @@ Before installing dependencies, you need to create a copy of the `.npmrc.config`
 - `pnpm dev:prepare`
 - `pnpm orchestr-dev`
 
-That's it! You can now use My Laioutr App in your [Laioutr Frontend](https://laioutr.com) ✨
+That's it! You can now use Hygraph Laioutr in your [Laioutr Frontend](https://laioutr.com) ✨
 
 You can find a thorough guide on getting started with Laioutr development in our [developer guide](https://docs.laioutr.io/developer-guide/setup).
 
@@ -73,12 +73,12 @@ Follow the [setup guide](https://docs.laioutr.io/developer-guide/setup) to get s
 
 <!-- Badges -->
 
-[npm-version-src]: https://img.shields.io/npm/v/my-laioutr-app/latest.svg?style=flat&colorA=020420&colorB=00DC82
-[npm-version-href]: https://npmjs.com/package/my-laioutr-app
-[npm-downloads-src]: https://img.shields.io/npm/dm/my-laioutr-app.svg?style=flat&colorA=020420&colorB=00DC82
-[npm-downloads-href]: https://npm.chart.dev/my-laioutr-app
-[license-src]: https://img.shields.io/npm/l/my-laioutr-app.svg?style=flat&colorA=020420&colorB=00DC82
-[license-href]: https://npmjs.com/package/my-laioutr-app
+[npm-version-src]: https://img.shields.io/npm/v/@laioutr/app-hygraph/latest.svg?style=flat&colorA=020420&colorB=00DC82
+[npm-version-href]: https://npmjs.com/package/@laioutr/app-hygraph
+[npm-downloads-src]: https://img.shields.io/npm/dm/@laioutr/app-hygraph.svg?style=flat&colorA=020420&colorB=00DC82
+[npm-downloads-href]: https://npm.chart.dev/@laioutr/app-hygraph
+[license-src]: https://img.shields.io/npm/l/@laioutr/app-hygraph.svg?style=flat&colorA=020420&colorB=00DC82
+[license-href]: https://npmjs.com/package/@laioutr/app-hygraph
 [nuxt-src]: https://img.shields.io/badge/Nuxt-020420?logo=nuxt.js
 [nuxt-href]: https://nuxt.com
 [laioutr-src]: https://img.shields.io/badge/%F0%9F%A6%99_Laioutr_App-702DCE
