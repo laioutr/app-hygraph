@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.1.2
+
+[compare changes](https://undefined/undefined/compare/v1.1.1...v1.1.2)
+
+### 🩹 Fixes
+
+- Do not transform SVGs in NuxtImage (b3e000b)
+
+### ❤️ Contributors
+
+- Sebastian Langer <sebastian.langer@laioutr.com>
+
 ## v1.1.1
 
 [compare changes](https://undefined/undefined/compare/v1.1.0...v1.1.1)
