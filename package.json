@@ -36,7 +36,7 @@
     "test:watch": "vitest watch"
   },
   "dependencies": {
-    "@laioutr-core/canonical-types": "^0.21.0",
+    "@laioutr-core/canonical-types": "^0.22.0",
     "@laioutr-core/core-types": "^0.26.0",
     "@laioutr-core/kit": "^0.26.0",
     "@nuxt/kit": "3.16.2",
