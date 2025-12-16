@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.1.5
+
+[compare changes](https://undefined/undefined/compare/v1.1.4...v1.1.5)
+
+### 🏡 Chore
+
+- Update dependencies (fc0e20f)
+
+### ❤️ Contributors
+
+- Sebastian Langer <sebastian.langer@laioutr.com>
+
 ## v1.1.4
 
 [compare changes](https://undefined/undefined/compare/v1.1.3...v1.1.4)
