@@ -1,6 +1,6 @@
 {
   "name": "@laioutr/app-hygraph",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "Laioutr Hygraph App",
   "repository": "your-org/@laioutr/app-hygraph",
   "license": "MIT",
@@ -36,9 +36,9 @@
     "test:watch": "vitest watch"
   },
   "dependencies": {
-    "@laioutr-core/canonical-types": "^0.22.0",
-    "@laioutr-core/core-types": "^0.26.0",
-    "@laioutr-core/kit": "^0.26.0",
+    "@laioutr-core/canonical-types": "^0.22.2",
+    "@laioutr-core/core-types": "^0.27.0",
+    "@laioutr-core/kit": "^0.27.0",
     "@nuxt/kit": "3.16.2",
     "@pinia/colada": "0.17.1",
     "@pinia/colada-nuxt": "0.2.1",
@@ -47,7 +47,7 @@
     "zod": "3.25.61"
   },
   "devDependencies": {
-    "@laioutr-core/orchestr-devtools": "^1.6.6",
+    "@laioutr-core/orchestr-devtools": "^1.6.10",
     "@laioutr/eslint-config": "^1.8.8",
     "@laioutr/prettier-config": "^1.1.0",
     "@nuxt/devtools": "^2.6.3",
@@ -64,7 +64,7 @@
     "vue-tsc": "2.2.10"
   },
   "peerDependencies": {
-    "@laioutr-core/frontend-core": "^0.26.0"
+    "@laioutr-core/frontend-core": "^0.27.0"
   },
   "engines": {
     "node": ">=22.12.0",
