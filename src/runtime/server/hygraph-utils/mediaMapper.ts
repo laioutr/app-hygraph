@@ -1,5 +1,11 @@
 import { MediaImage } from '@laioutr-core/core-types/common';
 
+/** Remove the file extension from a file name. */
+const stripFileExtension = (fileName: string) => fileName.replace(/\.[^.]+$/, '');
+
+/** Convert a file name to a readable alt text. */
+const filenameToAlt = (fileName: string) => stripFileExtension(fileName);
+
 /**
  * Map a Hygraph asset to a Media object.
  */
@@ -15,5 +21,5 @@ export const mapHygraphMedia = (asset: any): MediaImage => ({
       responsive: 'static',
     },
   ],
-  alt: asset.fileName,
+  alt: filenameToAlt(asset.fileName),
 });
