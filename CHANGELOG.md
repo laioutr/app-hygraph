@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.1.7
+
+[compare changes](https://undefined/undefined/compare/v1.1.6...v1.1.7)
+
+### 🩹 Fixes
+
+- Update core-dependency to 0.27.0 (92e1018)
+
+### ❤️ Contributors
+
+- Sebastian Langer <sebastian.langer@laioutr.com>
+
 ## v1.1.6
 
 [compare changes](https://undefined/undefined/compare/v1.1.5...v1.1.6)
