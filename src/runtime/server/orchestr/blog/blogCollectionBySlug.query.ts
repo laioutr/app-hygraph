@@ -3,7 +3,7 @@ import { defineHygraph } from '../../middleware/defineHygraph';
 
 export default defineHygraph.queryHandler({
   implements: BlogCollectionBySlug,
-  run: async () => ({
-    id: 'hygraph',
+  run: async ({ input }) => ({
+    id: input.slug,
   }),
 });
