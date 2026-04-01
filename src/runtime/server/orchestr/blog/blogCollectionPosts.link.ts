@@ -1,12 +1,13 @@
 import { BlogCollectionPostsLink } from '@laioutr-core/canonical-types/blog';
+import type { BlogsQuery } from '../../generated/graphql';
 import { blogPostsToken } from '../../const/passthroughTokens';
 import { defineHygraph } from '../../middleware/defineHygraph';
-import { BlogsQuery } from '../../queries/blog';
+import { BLOGS_QUERY } from '../../queries/blog';
 
 export default defineHygraph.linkHandler({
   implements: BlogCollectionPostsLink,
   run: async ({ context, entityIds, pagination, passthrough }) => {
-    const result = await context.hygraph.request(BlogsQuery, {
+    const result = await context.hygraph.request<BlogsQuery>(BLOGS_QUERY, {
       skip: pagination.offset,
       first: pagination.limit,
     });
@@ -17,7 +18,7 @@ export default defineHygraph.linkHandler({
     return {
       links: entityIds.map((id) => ({
         sourceId: id,
-        targetIds: blogs.map((blog: any) => blog.id),
+        targetIds: blogs.map((blog) => blog.id),
       })),
     };
   },

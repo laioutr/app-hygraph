@@ -1,12 +1,13 @@
 import { BlogPostBySlug, BlogPostBySlugNotFoundError } from '@laioutr-core/canonical-types/blog';
+import type { BlogPostBySlugQuery } from '../../generated/graphql';
 import { blogPostsToken } from '../../const/passthroughTokens';
 import { defineHygraph } from '../../middleware/defineHygraph';
-import { BlogPostBySlugQuery } from '../../queries/blog';
+import { BLOG_POST_BY_SLUG_QUERY } from '../../queries/blog';
 
 export default defineHygraph.queryHandler({
   implements: BlogPostBySlug,
   run: async ({ context, input, passthrough }) => {
-    const result = await context.hygraph.request(BlogPostBySlugQuery, {
+    const result = await context.hygraph.request<BlogPostBySlugQuery>(BLOG_POST_BY_SLUG_QUERY, {
       slug: input.slug,
     });
 

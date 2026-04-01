@@ -17,7 +17,7 @@ const BlogFragment = /* GraphQL */ `
   }
 `;
 
-export const BlogsQuery = /* GraphQL */ `
+export const BLOGS_QUERY = /* GraphQL */ `
   #graphql
   ${BlogFragment}
   query Blogs($skip: Int, $first: Int) {
@@ -27,7 +27,7 @@ export const BlogsQuery = /* GraphQL */ `
   }
 `;
 
-export const BlogPostBySlugQuery = /* GraphQL */ `
+export const BLOG_POST_BY_SLUG_QUERY = /* GraphQL */ `
   #graphql
   ${BlogFragment}
   query BlogPostBySlug($slug: String!) {

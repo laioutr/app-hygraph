@@ -23,6 +23,7 @@
     "dist"
   ],
   "scripts": {
+    "codegen": "graphql-codegen --config codegen.ts",
     "dev": "npm run dev:prepare && nuxi dev playground",
     "dev:build": "nuxi build playground",
     "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground",
@@ -36,9 +37,9 @@
     "test:watch": "vitest watch"
   },
   "dependencies": {
-    "@laioutr-core/canonical-types": "^0.22.2",
-    "@laioutr-core/core-types": "^0.27.0",
-    "@laioutr-core/kit": "^0.27.0",
+    "@laioutr-core/canonical-types": "^0.22.9",
+    "@laioutr-core/core-types": "^0.28.4",
+    "@laioutr-core/kit": "^0.28.4",
     "@nuxt/kit": "3.16.2",
     "@pinia/colada": "0.17.1",
     "@pinia/colada-nuxt": "0.2.1",
@@ -47,6 +48,10 @@
     "zod": "3.25.61"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^6.2.1",
+    "@graphql-codegen/typescript": "^5.0.9",
+    "@graphql-codegen/typescript-operations": "^5.0.9",
+    "@laioutr-app/ui": "^1.31.4",
     "@laioutr-core/orchestr-devtools": "^1.6.10",
     "@laioutr/eslint-config": "^1.8.8",
     "@laioutr/prettier-config": "^1.1.0",
@@ -58,13 +63,14 @@
     "@types/node": "latest",
     "changelogen": "^0.6.2",
     "eslint": "^9.35.0",
+    "graphql": "^16.13.1",
     "nuxt": "3.16.2",
     "typescript": "5.9.2",
     "vitest": "3.1.1",
     "vue-tsc": "2.2.10"
   },
   "peerDependencies": {
-    "@laioutr-core/frontend-core": "^0.27.0"
+    "@laioutr-core/frontend-core": "^0.28.4"
   },
   "engines": {
     "node": ">=22.12.0",

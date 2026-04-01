@@ -11,7 +11,7 @@ export default defineHygraph.componentResolver({
     const posts = passthrough.require(blogPostsToken);
 
     return {
-      entities: posts.map((post: any) =>
+      entities: posts.map((post) =>
         $entity({
           id: post.id,
           base: {
