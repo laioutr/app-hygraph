@@ -1,9 +1,14 @@
 import { useRuntimeConfig } from '#imports';
 
+export interface HygraphResponse<TData> {
+  data: TData;
+  errors?: Array<{ message: string }>;
+}
+
 export const hygraphClientFactory = () => {
   const config = useRuntimeConfig()['@laioutr/app-hygraph'];
 
-  const request = async (query: string, variables: unknown = null) => {
+  const request = async <TData = unknown>(query: string, variables: unknown = null): Promise<HygraphResponse<TData>> => {
     const res = await fetch(config.contentApiUrl, {
       method: 'POST',
       headers: {
@@ -12,7 +17,7 @@ export const hygraphClientFactory = () => {
       body: JSON.stringify({ query, variables }),
     });
 
-    return res.json();
+    return res.json() as Promise<HygraphResponse<TData>>;
   };
 
   return { request };

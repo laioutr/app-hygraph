@@ -11,19 +11,24 @@ export default defineHygraph.componentResolver({
     const posts = passthrough.require(blogPostsToken);
 
     return {
-      entities: posts.map((post: any) =>
+      entities: posts.map((post) =>
         $entity({
           id: post.id,
           base: {
             slug: post.slug,
             title: post.title,
-            publishedAt: new Date(post.publishedAt),
+            publishedAt: post.publishedAt ? new Date(post.publishedAt) : undefined,
           },
           content: {
             content: { html: post.content.html },
           },
-          excerpt: {
-            excerpt: { html: post.content.html.slice(0, 100) },
+          excerpt: () => {
+            const content = post.content.html.replace(/<[^>]*>/g, '');
+            const excerpt = content.slice(0, 100) + (content.length > 100 ? '…' : '');
+
+            return {
+              excerpt: { html: excerpt },
+            };
           },
           media: {
             image:

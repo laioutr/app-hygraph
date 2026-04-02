@@ -1,6 +1,6 @@
 import { AssetFragment } from './asset';
 
-export const MediaLibraryListQuery = /* GraphQL */ `
+export const MEDIA_LIBRARY_LIST_QUERY = /* GraphQL */ `
   #graphql
   ${AssetFragment}
   query MediaLibraryList($skip: Int, $first: Int, $search: String) {
