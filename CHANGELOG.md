@@ -1,6 +1,19 @@
 # Changelog
 
 
+## v1.2.0
+
+[compare changes](https://undefined/undefined/compare/v1.1.8...v1.2.0)
+
+### 🚀 Enhancements
+
+- Add hygraph codegen (4c176f8)
+- Implement graphql codegen and correct blog-handlers (01536a2)
+
+### ❤️ Contributors
+
+- Sebastian Langer <sebastian.langer@laioutr.com>
+
 ## v1.1.8
 
 [compare changes](https://undefined/undefined/compare/v1.1.7...v1.1.8)
