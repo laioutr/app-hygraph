@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.1.8
+
+[compare changes](https://undefined/undefined/compare/v1.1.7...v1.1.8)
+
+### 🏡 Chore
+
+- Update peer-dependency range (64cfd6e)
+
+### ❤️ Contributors
+
+- Sebastian Langer <sebastian.langer@laioutr.com>
+
 ## v1.1.7
 
 [compare changes](https://undefined/undefined/compare/v1.1.6...v1.1.7)

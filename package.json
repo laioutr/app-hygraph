@@ -1,6 +1,6 @@
 {
   "name": "@laioutr/app-hygraph",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "description": "Laioutr Hygraph App",
   "repository": "your-org/@laioutr/app-hygraph",
   "license": "MIT",
@@ -23,7 +23,6 @@
     "dist"
   ],
   "scripts": {
-    "codegen": "graphql-codegen --config codegen.ts",
     "dev": "npm run dev:prepare && nuxi dev playground",
     "dev:build": "nuxi build playground",
     "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground",
@@ -37,22 +36,15 @@
     "test:watch": "vitest watch"
   },
   "dependencies": {
-    "@laioutr-core/canonical-types": "^0.22.9",
-    "@laioutr-core/core-types": "^0.28.4",
-    "@laioutr-core/kit": "^0.28.4",
     "@nuxt/kit": "3.16.2",
+    "zod": "3.25.61"
+  },
+  "devDependencies": {
+    "@laioutr-core/orchestr-devtools": "^1.6.21",
     "@pinia/colada": "0.17.1",
     "@pinia/colada-nuxt": "0.2.1",
     "@vueuse/core": "13.1.0",
     "pinia": "3.0.2",
-    "zod": "3.25.61"
-  },
-  "devDependencies": {
-    "@graphql-codegen/cli": "^6.2.1",
-    "@graphql-codegen/typescript": "^5.0.9",
-    "@graphql-codegen/typescript-operations": "^5.0.9",
-    "@laioutr-app/ui": "^1.31.4",
-    "@laioutr-core/orchestr-devtools": "^1.6.10",
     "@laioutr/eslint-config": "^1.8.8",
     "@laioutr/prettier-config": "^1.1.0",
     "@nuxt/devtools": "^2.6.3",
@@ -63,14 +55,21 @@
     "@types/node": "latest",
     "changelogen": "^0.6.2",
     "eslint": "^9.35.0",
-    "graphql": "^16.13.1",
     "nuxt": "3.16.2",
     "typescript": "5.9.2",
     "vitest": "3.1.1",
-    "vue-tsc": "2.2.10"
+    "vue-tsc": "2.2.10",
+    "@graphql-codegen/cli": "^6.2.1",
+    "@graphql-codegen/typescript": "^5.0.9",
+    "@graphql-codegen/typescript-operations": "^5.0.9",
+    "graphql": "^16.13.1",
+    "@laioutr-app/ui": "^1.32.2"
   },
   "peerDependencies": {
-    "@laioutr-core/frontend-core": "^0.28.4"
+    "@laioutr-core/canonical-types": ">=0.22.13",
+    "@laioutr-core/core-types": ">=0.28.8",
+    "@laioutr-core/frontend-core": ">=0.28.8",
+    "@laioutr-core/kit": ">=0.28.8"
   },
   "engines": {
     "node": ">=22.12.0",
