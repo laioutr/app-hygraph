@@ -18,11 +18,6 @@ export default defineNuxtConfig({
     imageBaseUrl: import.meta.env.HYGRAPH_IMAGE_BASE_URL,
     token: import.meta.env.HYGRAPH_TOKEN,
   },
-  i18n: {
-    bundle: {
-      optimizeTranslationDirective: false,
-    },
-  },
   devtools: { enabled: true },
   compatibilityDate: '2025-09-11',
 });

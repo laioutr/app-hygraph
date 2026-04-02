@@ -1,8 +1,0 @@
-fragment Asset on Asset {
-  url
-  fileName
-  mimeType
-  width
-  height
-  handle
-}

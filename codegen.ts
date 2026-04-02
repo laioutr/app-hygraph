@@ -11,7 +11,7 @@ const config: CodegenConfig = {
       },
     },
   ],
-  documents: 'src/runtime/server/queries/**/*.graphql',
+  documents: 'src/runtime/server/queries/**/*.ts',
   generates: {
     'src/runtime/server/generated/graphql.ts': {
       plugins: ['typescript', 'typescript-operations'],
