@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.3.0
+
+[compare changes](https://undefined/undefined/compare/v1.2.0...v1.3.0)
+
+### 🚀 Enhancements
+
+- Export hygraph helpers (fe65538)
+
+### ❤️ Contributors
+
+- Sebastian Langer <sebastian.langer@laioutr.com>
+
 ## v1.2.0
 
 [compare changes](https://undefined/undefined/compare/v1.1.8...v1.2.0)
