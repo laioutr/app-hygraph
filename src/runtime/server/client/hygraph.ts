@@ -1,12 +1,10 @@
 import { useRuntimeConfig } from '#imports';
+import type { HygraphClientConfig, HygraphResponse } from '../types/hygraph';
 
-export interface HygraphResponse<TData> {
-  data: TData;
-  errors?: Array<{ message: string }>;
-}
+export type { HygraphResponse };
 
-export const hygraphClientFactory = () => {
-  const config = useRuntimeConfig()['@laioutr/app-hygraph'];
+export const hygraphClientFactory = (explicitConfig?: HygraphClientConfig) => {
+  const config = explicitConfig ?? useRuntimeConfig()['@laioutr/app-hygraph'];
 
   const request = async <TData = unknown>(query: string, variables: unknown = null): Promise<HygraphResponse<TData>> => {
     const res = await fetch(config.contentApiUrl, {

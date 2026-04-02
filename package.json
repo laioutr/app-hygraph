@@ -9,6 +9,18 @@
     ".": {
       "types": "./dist/types.d.mts",
       "import": "./dist/module.mjs"
+    },
+    "./runtime": {
+      "types": "./dist/runtime/index.d.ts",
+      "import": "./dist/runtime/index.js"
+    },
+    "./codegen": {
+      "types": "./dist/codegen/index.d.mts",
+      "import": "./dist/codegen/index.mjs"
+    },
+    "./queries": {
+      "types": "./dist/queries/index.d.mts",
+      "import": "./dist/queries/index.mjs"
     }
   },
   "main": "./dist/module.mjs",
@@ -16,6 +28,15 @@
     "*": {
       ".": [
         "./dist/types.d.mts"
+      ],
+      "runtime": [
+        "./dist/runtime/index.d.ts"
+      ],
+      "codegen": [
+        "./dist/codegen/index.d.mts"
+      ],
+      "queries": [
+        "./dist/queries/index.d.mts"
       ]
     }
   },
@@ -69,7 +90,17 @@
     "@laioutr-core/canonical-types": ">=0.22.13",
     "@laioutr-core/core-types": ">=0.28.8",
     "@laioutr-core/frontend-core": ">=0.28.8",
-    "@laioutr-core/kit": ">=0.28.8"
+    "@laioutr-core/kit": ">=0.28.8",
+    "@graphql-codegen/cli": "^6.0.0",
+    "graphql": "^16.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@graphql-codegen/cli": {
+      "optional": true
+    },
+    "graphql": {
+      "optional": true
+    }
   },
   "engines": {
     "node": ">=22.12.0",

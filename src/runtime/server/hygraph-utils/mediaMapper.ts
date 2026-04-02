@@ -1,11 +1,11 @@
 import { MediaImage } from '@laioutr-core/core-types/common';
-import type { AssetFragment } from '../generated/graphql';
+import type { HygraphAsset } from '../types/hygraph';
 
 /** Remove the file extension from a file name. */
-const stripFileExtension = (fileName: string) => fileName.replace(/\.[^.]+$/, '');
+export const stripFileExtension = (fileName: string) => fileName.replace(/\.[^.]+$/, '');
 
 /** Convert a file name to a readable alt text. */
-const filenameToAlt = (fileName: string) =>
+export const filenameToAlt = (fileName: string) =>
   stripFileExtension(fileName)
     .replace(/([a-z])([A-Z])/g, '$1 $2')
     .replace(/[-_]+/g, ' ')
@@ -15,7 +15,7 @@ const filenameToAlt = (fileName: string) =>
 /**
  * Map a Hygraph asset to a Media object.
  */
-export const mapHygraphMedia = (asset: AssetFragment): MediaImage => ({
+export const mapHygraphMedia = (asset: HygraphAsset): MediaImage => ({
   type: 'image',
   sources: [
     {
