@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.4.0
+
+[compare changes](https://undefined/undefined/compare/v1.3.0...v1.4.0)
+
+### 🚀 Enhancements
+
+- Orchestr-builder uses extendRequest instead of use (36dde2f)
+
+### ❤️ Contributors
+
+- Sebastian Langer <sebastian.langer@laioutr.com>
+
 ## v1.3.0
 
 [compare changes](https://undefined/undefined/compare/v1.2.0...v1.3.0)
