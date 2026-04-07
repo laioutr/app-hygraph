@@ -1,13 +1,4 @@
-<!--
-Get your module up and running quickly.
-
-Find and replace all on all files (CMD+SHIFT+F):
-- Name: Hygraph Laioutr
-- Package name: @laioutr/app-hygraph
-- Description: Laioutr Hygraph App
--->
-
-# Hygraph Laioutr
+# @laioutr/app-hygraph
 
 [![Laioutr][laioutr-src]][laioutr-href]
 [![npm version][npm-version-src]][npm-version-href]
@@ -15,61 +6,143 @@ Find and replace all on all files (CMD+SHIFT+F):
 [![License][license-src]][license-href]
 [![Nuxt][nuxt-src]][nuxt-href]
 
-My new [Laioutr](https://laioutr.com) App for doing amazing things using Nuxt.
-
-See [laioutr.com](https://laioutr.com) for more information about Laioutr.
-
-- [✨ &nbsp;Release Notes](/CHANGELOG.md)
-  <!-- - [🏀 Online playground](https://stackblitz.com/github/your-org/@laioutr/app-hygraph?file=playground%2Fapp.vue) -->
-  <!-- - [📖 &nbsp;Documentation](https://example.com) -->
+Laioutr app that integrates [Hygraph](https://hygraph.com) as a headless CMS. Provides a media library for the Laioutr Studio, blog content handlers, and reusable exports for other apps that connect to Hygraph.
 
 ## Features
 
-<!-- Highlight some of the features your module provide here -->
+### Assets
 
-- ⛰ &nbsp;Foo
-- 🚠 &nbsp;Bar
-- 🌲 &nbsp;Baz
+The module registers a Hygraph media library in the Laioutr Studio, giving editors a browsable asset picker backed by their Hygraph project.
 
-## Quick Setup
+The laioutr-integrated @nuxt/image provider is configured to use the Hygraph image CDN.
 
-Before installing dependencies, you need to create a copy of the `.npmrc.config` file called `.npmrc` and fill in the `NPM_LAIOUTR_TOKEN` with your npm token. You can find this token in your [project settings](https://cockpit.laioutr.cloud/o/_/p/_/settings).
+### Exports
 
-- `pnpm i`
-- `npx @laioutr/cli project fetch-rc -p <organization slug>/<project slug> -s <project secret key>` - This will load the `laioutrrc.json` file with the current remote project configuration.
-- `pnpm dev:prepare`
-- `pnpm orchestr-dev`
+Other Laioutr apps that also talk to Hygraph can import the client, middleware, codegen config, and utilities from this package instead of duplicating code or configurationn. See [Exports](#exports) below.
 
-That's it! You can now use Hygraph Laioutr in your [Laioutr Frontend](https://laioutr.com) ✨
+### Blog Demo
 
-You can find a thorough guide on getting started with Laioutr development in our [developer guide](https://docs.laioutr.io/developer-guide/setup).
+The module also includes a demo blog implementation with orchestr-handlers for blog content: query handlers and query template providers for blog collections and posts, link handlers for connecting posts to collections, and component resolvers for rendering both.
 
-## Linting and Formatting
+## Configuration
 
-We use ESLint and Prettier to lint and format the code. This repository contains opinionated configurations for both tools. You can - of course - replace them with your own configurations.
+Add the module to your `nuxt.config.ts` and provide your Hygraph credentials:
+
+```ts
+export default defineNuxtConfig({
+  modules: ['@laioutr/app-hygraph'],
+  '@laioutr/app-hygraph': {
+    contentApiUrl: 'https://...',
+    imageBaseUrl: 'https://...',
+    token: '...',
+  },
+});
+```
+
+| Option          | Description                                                                                                                                                                |
+| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `contentApiUrl` | Hygraph Content API endpoint                                                                                                                                               |
+| `imageBaseUrl`  | Hygraph image CDN base URL (used by `@nuxt/image`). Region-specific; find yours by querying `{ assets(first: 1) { url } }` against your Content API and taking the domain. |
+| `token`         | Permanent auth token for the Content API                                                                                                                                   |
+
+## Exports
+
+The package exposes three subpath exports for use outside the Nuxt module context.
+
+### `@laioutr/app-hygraph/runtime`
+
+Everything needed to build Hygraph-backed orchestr handlers in another app.
+
+```ts
+import { defineHygraph, hygraphClientFactory, mapHygraphMedia } from '@laioutr/app-hygraph/runtime';
+import type { HygraphAsset, HygraphClientConfig, HygraphResponse } from '@laioutr/app-hygraph/runtime';
+```
+
+| Export                          | Purpose                                                                                                                                                                       |
+| ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `defineHygraph`                 | Pre-configured orchestr builder with Hygraph metadata and a `context.hygraph` client. Chain `.queryHandler()`, `.linkHandler()`, etc. directly on it.                         |
+| `hygraphClientFactory(config?)` | Creates a Hygraph GraphQL client. Falls back to `useRuntimeConfig()` when called without arguments inside the Nuxt module. Pass a `HygraphClientConfig` to use it standalone. |
+| `mapHygraphMedia(asset)`        | Converts a `HygraphAsset` to a Laioutr `MediaImage`, selecting the correct Nuxt Image provider (handles SVGs).                                                                |
+
+### `@laioutr/app-hygraph/codegen`
+
+Generates TypeScript types from your Hygraph schema using GraphQL Code Generator. The factory produces a codegen config with Hygraph-specific scalar mappings (`DateTime`, `RichTextAST`, `Json`, `Long`, `Hex`, etc.) so you don't have to define them yourself.
+
+Install the peer dependencies:
+
+```bash
+pnpm add -D @graphql-codegen/cli @graphql-codegen/typescript @graphql-codegen/typescript-operations graphql
+```
+
+Create a `codegen.ts` at your project root:
+
+```ts
+import { defineHygraphCodegen } from '@laioutr/app-hygraph/codegen';
+
+export default defineHygraphCodegen({
+  documents: 'src/runtime/server/queries/**/*.ts',
+  outputPath: 'src/runtime/server/generated/graphql.ts',
+});
+```
+
+Set `HYGRAPH_CONTENT_API_URL` and `HYGRAPH_TOKEN` in your environment, then run:
+
+```bash
+npx graphql-codegen
+```
+
+This reads your `.ts` files containing tagged `/* GraphQL */` template literals, introspects the Hygraph schema, and writes the generated types to `outputPath`.
+
+| Option       | Default                                                                               |
+| ------------ | ------------------------------------------------------------------------------------- |
+| `schemaUrl`  | `process.env.HYGRAPH_CONTENT_API_URL`                                                 |
+| `token`      | `process.env.HYGRAPH_TOKEN`                                                           |
+| `documents`  | `src/runtime/server/queries/**/*.ts`                                                  |
+| `outputPath` | `src/runtime/server/generated/graphql.ts`                                             |
+| `scalars`    | Hygraph defaults (`DateTime`, `RichTextAST`, `Json`, etc.) merged with your overrides |
+
+### `@laioutr/app-hygraph/queries`
+
+Reusable GraphQL fragments.
+
+```ts
+import { AssetFragment } from '@laioutr/app-hygraph/queries';
+
+const MY_QUERY = /* GraphQL */ `
+  ${AssetFragment}
+  query MyQuery {
+    assets {
+      ...Asset
+    }
+  }
+`;
+```
+
+## Development
+
+```bash
+# 1. Copy .npmrc.config to .npmrc and fill in NPM_LAIOUTR_TOKEN
+# 2. Install dependencies
+pnpm i
+
+# 3. Fetch remote project config
+npx @laioutr/cli rc fetch -p <org-slug>/<project-slug> -s <secret-key>
+
+# 4. Prepare and start
+pnpm dev:prepare
+pnpm dev              # playground
+pnpm orchestr-dev     # orchestr playground
+```
 
 ## Publishing
 
-To publish a new version, run `pnpm release`. This will:
+```bash
+pnpm release
+```
 
-- Run the tests
-- Update the changelog
-- Publish the package to npmjs.org
-- Push the changes to the repository
+Runs lint, tests, builds, updates the changelog, publishes to npm, and pushes tags.
 
-### Private publishing
-
-If you want to publish a private package to npm.laioutr.cloud, you need to:
-
-1. Make sure you have a `.npmrc` with your private npm registry token.
-2. Add this line to the root of the `package.json` file: `"publishConfig": { "registry": "https://npm.laioutr.cloud/" }`
-3. Make sure your package-name follows the `@laioutr-org/<organization-slug>_<package-name>` format.
-
-After that you can run `pnpm release` to publish the package to npm.laioutr.cloud.
-
-## Contribution
-
-Follow the [setup guide](https://docs.laioutr.io/developer-guide/setup) to get started.
+For private publishing to `npm.laioutr.cloud`, add `"publishConfig": { "registry": "https://npm.laioutr.cloud/" }` to `package.json` and ensure your package name follows the `@laioutr-org/<org-slug>_<name>` format.
 
 <!-- Badges -->
 
