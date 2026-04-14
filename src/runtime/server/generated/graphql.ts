@@ -8846,7 +8846,7 @@ export type BlogsQueryVariables = Exact<{
 }>;
 
 
-export type BlogsQuery = { blogs: Array<{ id: string, title: string, slug: string, publishedAt?: string | null, content: { html: string }, image?: { url: string, fileName: string, mimeType?: string | null, width?: number | null, height?: number | null, handle: string } | null }>, blogsConnection: { aggregate: { count: number } } };
+export type BlogsQuery = { blogs: Array<{ id: string, title: string, slug: string, publishedAt?: string | null, content: { html: string }, image?: { url: string, fileName: string, mimeType?: string | null, width?: number | null, height?: number | null, handle: string } | null }> };
 
 export type BlogPostBySlugQueryVariables = Exact<{
   slug: Scalars['String']['input'];
