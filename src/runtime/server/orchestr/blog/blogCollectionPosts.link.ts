@@ -25,6 +25,7 @@ export default defineHygraph.linkHandler({
         sourceId: id,
         targetIds: results.at(i)?.data.blogs.map((blog) => blog.id) ?? [],
       })),
+      totalCount: results.at(0)?.data.blogsConnection.aggregate.count ?? 0,
     };
   },
 });
