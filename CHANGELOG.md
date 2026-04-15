@@ -1,6 +1,19 @@
 # Changelog
 
 
+## v1.5.0
+
+[compare changes](https://undefined/undefined/compare/v1.4.0...v1.5.0)
+
+### 🚀 Enhancements
+
+- Update orchestr-devtools to integrate into nuxt-devtools (4eddde0)
+- Add pagination for blog/collection/posts (b787784)
+
+### ❤️ Contributors
+
+- Sebastian Langer <sebastian.langer@laioutr.com>
+
 ## v1.4.0
 
 [compare changes](https://undefined/undefined/compare/v1.3.0...v1.4.0)
