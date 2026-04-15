@@ -21,10 +21,14 @@ export default defineHygraph.linkHandler({
     passthrough.set(blogPostsToken, allPosts);
 
     return {
-      links: entityIds.map((id, i) => ({
-        sourceId: id,
-        targetIds: results.at(i)?.data.blogs.map((blog) => blog.id) ?? [],
-      })),
+      links: entityIds.map((id, i) => {
+        const data = results.at(i)?.data;
+        return {
+          sourceId: id,
+          targetIds: data?.blogs.map((blog) => blog.id) ?? [],
+          entityTotal: data?.blogsConnection.aggregate.count ?? data?.blogs.length ?? 0,
+        };
+      }),
     };
   },
 });

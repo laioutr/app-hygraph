@@ -39,11 +39,11 @@ export default defineNuxtConfig({
 });
 ```
 
-| Option          | Description                                                                                                                                                                |
-| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `contentApiUrl` | Hygraph Content API endpoint                                                                                                                                               |
+| Option          | Description                                                                                                                                                                                                                                                                                                    |
+| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `contentApiUrl` | Hygraph Content API endpoint                                                                                                                                                                                                                                                                                   |
 | `imageBaseUrl`  | Hygraph image CDN base URL (used by [`@nuxt/image`](https://image.nuxt.com/providers/hygraph)). Region-specific; find yours by querying `{ assets(first: 1) { url } }` against your Content API and taking the domain + first path-segment, e.g. `https://eu-west-2.graphassets.com/cmh4jxx7w1fce07l80dils2d1` |
-| `token`         | Permanent auth token for the Content API                                                                                                                                   |
+| `token`         | Permanent auth token for the Content API                                                                                                                                                                                                                                                                       |
 
 ## Exports
 
@@ -123,15 +123,16 @@ const MY_QUERY = /* GraphQL */ `
 ```bash
 # 1. Copy .npmrc.config to .npmrc and fill in NPM_LAIOUTR_TOKEN
 # 2. Install dependencies
-pnpm i
+pnpm install
 
 # 3. Fetch remote project config
 npx @laioutr/cli rc fetch -p <org-slug>/<project-slug> -s <secret-key>
 
 # 4. Prepare and start
-pnpm dev:prepare
-pnpm dev              # playground
-pnpm orchestr-dev     # orchestr playground
+export HYGRAPH_CONTENT_API_URL=<your-content-api-url>
+export HYGRAPH_TOKEN=<your-token>
+export HYGRAPH_IMAGE_BASE_URL=<your-image-base-url>
+pnpm dev
 ```
 
 ## Publishing

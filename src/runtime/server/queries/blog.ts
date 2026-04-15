@@ -24,6 +24,11 @@ export const BLOGS_QUERY = /* GraphQL */ `
     blogs(skip: $skip, first: $first, orderBy: createdAt_DESC, where: { blogCollection: { id: $collectionId } }) {
       ...Blog
     }
+    blogsConnection {
+      aggregate {
+        count
+      }
+    }
   }
 `;
 

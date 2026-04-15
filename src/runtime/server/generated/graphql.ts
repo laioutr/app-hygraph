@@ -2140,13 +2140,14 @@ export type EntityWhereInput = {
 };
 
 export type Event = Entity & Node & {
-  content?: Maybe<Scalars['String']['output']>;
+  content?: Maybe<RichText>;
   /** The time the document was created */
   createdAt: Scalars['DateTime']['output'];
   /** User that created this document */
   createdBy?: Maybe<User>;
   /** Get the document in other stages */
   documentInStages: Array<Event>;
+  endDate?: Maybe<Scalars['Date']['output']>;
   eventCollection?: Maybe<EventCollection>;
   /** List of Event versions */
   history: Array<Version>;
@@ -2165,6 +2166,8 @@ export type Event = Entity & Node & {
   slug?: Maybe<Scalars['String']['output']>;
   /** System stage field */
   stage: Stage;
+  /** If no end date is provided, whole day is used */
+  startDate?: Maybe<Scalars['Date']['output']>;
   title: Scalars['String']['output'];
   topics: Array<Topic>;
   /** The time the document was updated */
@@ -2845,13 +2848,15 @@ export type EventConnection = {
 
 export type EventCreateInput = {
   /** content input for default locale (en) */
-  content?: InputMaybe<Scalars['String']['input']>;
+  content?: InputMaybe<Scalars['RichTextAST']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  endDate?: InputMaybe<Scalars['Date']['input']>;
   eventCollection?: InputMaybe<EventCollectionCreateOneInlineInput>;
   image?: InputMaybe<AssetCreateOneInlineInput>;
   /** Inline mutations for managing document localizations excluding the default locale */
   localizations?: InputMaybe<EventCreateLocalizationsInput>;
   slug?: InputMaybe<Scalars['String']['input']>;
+  startDate?: InputMaybe<Scalars['Date']['input']>;
   /** title input for default locale (en) */
   title: Scalars['String']['input'];
   topics?: InputMaybe<TopicCreateManyInlineInput>;
@@ -2859,7 +2864,7 @@ export type EventCreateInput = {
 };
 
 export type EventCreateLocalizationDataInput = {
-  content?: InputMaybe<Scalars['String']['input']>;
+  content?: InputMaybe<Scalars['RichTextAST']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   title: Scalars['String']['input'];
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -2927,6 +2932,21 @@ export type EventManyWhereInput = {
   documentInStages_every?: InputMaybe<EventWhereStageInput>;
   documentInStages_none?: InputMaybe<EventWhereStageInput>;
   documentInStages_some?: InputMaybe<EventWhereStageInput>;
+  endDate?: InputMaybe<Scalars['Date']['input']>;
+  /** All values greater than the given value. */
+  endDate_gt?: InputMaybe<Scalars['Date']['input']>;
+  /** All values greater than or equal the given value. */
+  endDate_gte?: InputMaybe<Scalars['Date']['input']>;
+  /** All values that are contained in given list. */
+  endDate_in?: InputMaybe<Array<InputMaybe<Scalars['Date']['input']>>>;
+  /** All values less than the given value. */
+  endDate_lt?: InputMaybe<Scalars['Date']['input']>;
+  /** All values less than or equal the given value. */
+  endDate_lte?: InputMaybe<Scalars['Date']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  endDate_not?: InputMaybe<Scalars['Date']['input']>;
+  /** All values that are not contained in given list. */
+  endDate_not_in?: InputMaybe<Array<InputMaybe<Scalars['Date']['input']>>>;
   eventCollection?: InputMaybe<EventCollectionWhereInput>;
   id?: InputMaybe<Scalars['ID']['input']>;
   /** All values containing the given string. */
@@ -2986,6 +3006,21 @@ export type EventManyWhereInput = {
   slug_not_starts_with?: InputMaybe<Scalars['String']['input']>;
   /** All values starting with the given string. */
   slug_starts_with?: InputMaybe<Scalars['String']['input']>;
+  startDate?: InputMaybe<Scalars['Date']['input']>;
+  /** All values greater than the given value. */
+  startDate_gt?: InputMaybe<Scalars['Date']['input']>;
+  /** All values greater than or equal the given value. */
+  startDate_gte?: InputMaybe<Scalars['Date']['input']>;
+  /** All values that are contained in given list. */
+  startDate_in?: InputMaybe<Array<InputMaybe<Scalars['Date']['input']>>>;
+  /** All values less than the given value. */
+  startDate_lt?: InputMaybe<Scalars['Date']['input']>;
+  /** All values less than or equal the given value. */
+  startDate_lte?: InputMaybe<Scalars['Date']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  startDate_not?: InputMaybe<Scalars['Date']['input']>;
+  /** All values that are not contained in given list. */
+  startDate_not_in?: InputMaybe<Array<InputMaybe<Scalars['Date']['input']>>>;
   topics_every?: InputMaybe<TopicWhereInput>;
   topics_none?: InputMaybe<TopicWhereInput>;
   topics_some?: InputMaybe<TopicWhereInput>;
@@ -3008,16 +3043,18 @@ export type EventManyWhereInput = {
 };
 
 export enum EventOrderByInput {
-  ContentAsc = 'content_ASC',
-  ContentDesc = 'content_DESC',
   CreatedAtAsc = 'createdAt_ASC',
   CreatedAtDesc = 'createdAt_DESC',
+  EndDateAsc = 'endDate_ASC',
+  EndDateDesc = 'endDate_DESC',
   IdAsc = 'id_ASC',
   IdDesc = 'id_DESC',
   PublishedAtAsc = 'publishedAt_ASC',
   PublishedAtDesc = 'publishedAt_DESC',
   SlugAsc = 'slug_ASC',
   SlugDesc = 'slug_DESC',
+  StartDateAsc = 'startDate_ASC',
+  StartDateDesc = 'startDate_DESC',
   TitleAsc = 'title_ASC',
   TitleDesc = 'title_DESC',
   UpdatedAtAsc = 'updatedAt_ASC',
@@ -3026,19 +3063,21 @@ export enum EventOrderByInput {
 
 export type EventUpdateInput = {
   /** content input for default locale (en) */
-  content?: InputMaybe<Scalars['String']['input']>;
+  content?: InputMaybe<Scalars['RichTextAST']['input']>;
+  endDate?: InputMaybe<Scalars['Date']['input']>;
   eventCollection?: InputMaybe<EventCollectionUpdateOneInlineInput>;
   image?: InputMaybe<AssetUpdateOneInlineInput>;
   /** Manage document localizations */
   localizations?: InputMaybe<EventUpdateLocalizationsInput>;
   slug?: InputMaybe<Scalars['String']['input']>;
+  startDate?: InputMaybe<Scalars['Date']['input']>;
   /** title input for default locale (en) */
   title?: InputMaybe<Scalars['String']['input']>;
   topics?: InputMaybe<TopicUpdateManyInlineInput>;
 };
 
 export type EventUpdateLocalizationDataInput = {
-  content?: InputMaybe<Scalars['String']['input']>;
+  content?: InputMaybe<Scalars['RichTextAST']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -3076,15 +3115,17 @@ export type EventUpdateManyInlineInput = {
 
 export type EventUpdateManyInput = {
   /** content input for default locale (en) */
-  content?: InputMaybe<Scalars['String']['input']>;
+  content?: InputMaybe<Scalars['RichTextAST']['input']>;
+  endDate?: InputMaybe<Scalars['Date']['input']>;
   /** Optional updates to localizations */
   localizations?: InputMaybe<EventUpdateManyLocalizationsInput>;
+  startDate?: InputMaybe<Scalars['Date']['input']>;
   /** title input for default locale (en) */
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type EventUpdateManyLocalizationDataInput = {
-  content?: InputMaybe<Scalars['String']['input']>;
+  content?: InputMaybe<Scalars['RichTextAST']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -3163,25 +3204,6 @@ export type EventWhereInput = {
   OR?: InputMaybe<Array<EventWhereInput>>;
   /** Contains search across all appropriate fields. */
   _search?: InputMaybe<Scalars['String']['input']>;
-  content?: InputMaybe<Scalars['String']['input']>;
-  /** All values containing the given string. */
-  content_contains?: InputMaybe<Scalars['String']['input']>;
-  /** All values ending with the given string. */
-  content_ends_with?: InputMaybe<Scalars['String']['input']>;
-  /** All values that are contained in given list. */
-  content_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** Any other value that exists and is not equal to the given value. */
-  content_not?: InputMaybe<Scalars['String']['input']>;
-  /** All values not containing the given string. */
-  content_not_contains?: InputMaybe<Scalars['String']['input']>;
-  /** All values not ending with the given string */
-  content_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  /** All values that are not contained in given list. */
-  content_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** All values not starting with the given string. */
-  content_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  /** All values starting with the given string. */
-  content_starts_with?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   /** All values greater than the given value. */
   createdAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -3201,6 +3223,21 @@ export type EventWhereInput = {
   documentInStages_every?: InputMaybe<EventWhereStageInput>;
   documentInStages_none?: InputMaybe<EventWhereStageInput>;
   documentInStages_some?: InputMaybe<EventWhereStageInput>;
+  endDate?: InputMaybe<Scalars['Date']['input']>;
+  /** All values greater than the given value. */
+  endDate_gt?: InputMaybe<Scalars['Date']['input']>;
+  /** All values greater than or equal the given value. */
+  endDate_gte?: InputMaybe<Scalars['Date']['input']>;
+  /** All values that are contained in given list. */
+  endDate_in?: InputMaybe<Array<InputMaybe<Scalars['Date']['input']>>>;
+  /** All values less than the given value. */
+  endDate_lt?: InputMaybe<Scalars['Date']['input']>;
+  /** All values less than or equal the given value. */
+  endDate_lte?: InputMaybe<Scalars['Date']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  endDate_not?: InputMaybe<Scalars['Date']['input']>;
+  /** All values that are not contained in given list. */
+  endDate_not_in?: InputMaybe<Array<InputMaybe<Scalars['Date']['input']>>>;
   eventCollection?: InputMaybe<EventCollectionWhereInput>;
   id?: InputMaybe<Scalars['ID']['input']>;
   /** All values containing the given string. */
@@ -3260,6 +3297,21 @@ export type EventWhereInput = {
   slug_not_starts_with?: InputMaybe<Scalars['String']['input']>;
   /** All values starting with the given string. */
   slug_starts_with?: InputMaybe<Scalars['String']['input']>;
+  startDate?: InputMaybe<Scalars['Date']['input']>;
+  /** All values greater than the given value. */
+  startDate_gt?: InputMaybe<Scalars['Date']['input']>;
+  /** All values greater than or equal the given value. */
+  startDate_gte?: InputMaybe<Scalars['Date']['input']>;
+  /** All values that are contained in given list. */
+  startDate_in?: InputMaybe<Array<InputMaybe<Scalars['Date']['input']>>>;
+  /** All values less than the given value. */
+  startDate_lt?: InputMaybe<Scalars['Date']['input']>;
+  /** All values less than or equal the given value. */
+  startDate_lte?: InputMaybe<Scalars['Date']['input']>;
+  /** Any other value that exists and is not equal to the given value. */
+  startDate_not?: InputMaybe<Scalars['Date']['input']>;
+  /** All values that are not contained in given list. */
+  startDate_not_in?: InputMaybe<Array<InputMaybe<Scalars['Date']['input']>>>;
   title?: InputMaybe<Scalars['String']['input']>;
   /** All values containing the given string. */
   title_contains?: InputMaybe<Scalars['String']['input']>;
@@ -3409,7 +3461,7 @@ export type ImageTransformationInput = {
 };
 
 export type LearningResource = Entity & Node & {
-  content?: Maybe<Scalars['String']['output']>;
+  content?: Maybe<RichText>;
   /** The time the document was created */
   createdAt: Scalars['DateTime']['output'];
   /** User that created this document */
@@ -3418,6 +3470,7 @@ export type LearningResource = Entity & Node & {
   documentInStages: Array<LearningResource>;
   /** List of LearningResource versions */
   history: Array<Version>;
+  hubspotFormId?: Maybe<Scalars['String']['output']>;
   /** The unique identifier */
   id: Scalars['ID']['output'];
   image?: Maybe<Asset>;
@@ -4110,8 +4163,9 @@ export type LearningResourceConnection = {
 
 export type LearningResourceCreateInput = {
   /** content input for default locale (en) */
-  content?: InputMaybe<Scalars['String']['input']>;
+  content?: InputMaybe<Scalars['RichTextAST']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  hubspotFormId?: InputMaybe<Scalars['String']['input']>;
   image?: InputMaybe<AssetCreateOneInlineInput>;
   learningResourceCollections?: InputMaybe<LearningResourceCollectionCreateManyInlineInput>;
   /** Inline mutations for managing document localizations excluding the default locale */
@@ -4124,7 +4178,7 @@ export type LearningResourceCreateInput = {
 };
 
 export type LearningResourceCreateLocalizationDataInput = {
-  content?: InputMaybe<Scalars['String']['input']>;
+  content?: InputMaybe<Scalars['RichTextAST']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   title: Scalars['String']['input'];
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -4192,6 +4246,25 @@ export type LearningResourceManyWhereInput = {
   documentInStages_every?: InputMaybe<LearningResourceWhereStageInput>;
   documentInStages_none?: InputMaybe<LearningResourceWhereStageInput>;
   documentInStages_some?: InputMaybe<LearningResourceWhereStageInput>;
+  hubspotFormId?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  hubspotFormId_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  hubspotFormId_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  hubspotFormId_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  hubspotFormId_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  hubspotFormId_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  hubspotFormId_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  hubspotFormId_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  hubspotFormId_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  hubspotFormId_starts_with?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['ID']['input']>;
   /** All values containing the given string. */
   id_contains?: InputMaybe<Scalars['ID']['input']>;
@@ -4275,10 +4348,10 @@ export type LearningResourceManyWhereInput = {
 };
 
 export enum LearningResourceOrderByInput {
-  ContentAsc = 'content_ASC',
-  ContentDesc = 'content_DESC',
   CreatedAtAsc = 'createdAt_ASC',
   CreatedAtDesc = 'createdAt_DESC',
+  HubspotFormIdAsc = 'hubspotFormId_ASC',
+  HubspotFormIdDesc = 'hubspotFormId_DESC',
   IdAsc = 'id_ASC',
   IdDesc = 'id_DESC',
   PublishedAtAsc = 'publishedAt_ASC',
@@ -4293,7 +4366,8 @@ export enum LearningResourceOrderByInput {
 
 export type LearningResourceUpdateInput = {
   /** content input for default locale (en) */
-  content?: InputMaybe<Scalars['String']['input']>;
+  content?: InputMaybe<Scalars['RichTextAST']['input']>;
+  hubspotFormId?: InputMaybe<Scalars['String']['input']>;
   image?: InputMaybe<AssetUpdateOneInlineInput>;
   learningResourceCollections?: InputMaybe<LearningResourceCollectionUpdateManyInlineInput>;
   /** Manage document localizations */
@@ -4305,7 +4379,7 @@ export type LearningResourceUpdateInput = {
 };
 
 export type LearningResourceUpdateLocalizationDataInput = {
-  content?: InputMaybe<Scalars['String']['input']>;
+  content?: InputMaybe<Scalars['RichTextAST']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -4343,7 +4417,8 @@ export type LearningResourceUpdateManyInlineInput = {
 
 export type LearningResourceUpdateManyInput = {
   /** content input for default locale (en) */
-  content?: InputMaybe<Scalars['String']['input']>;
+  content?: InputMaybe<Scalars['RichTextAST']['input']>;
+  hubspotFormId?: InputMaybe<Scalars['String']['input']>;
   /** Optional updates to localizations */
   localizations?: InputMaybe<LearningResourceUpdateManyLocalizationsInput>;
   /** title input for default locale (en) */
@@ -4351,7 +4426,7 @@ export type LearningResourceUpdateManyInput = {
 };
 
 export type LearningResourceUpdateManyLocalizationDataInput = {
-  content?: InputMaybe<Scalars['String']['input']>;
+  content?: InputMaybe<Scalars['RichTextAST']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -4430,25 +4505,6 @@ export type LearningResourceWhereInput = {
   OR?: InputMaybe<Array<LearningResourceWhereInput>>;
   /** Contains search across all appropriate fields. */
   _search?: InputMaybe<Scalars['String']['input']>;
-  content?: InputMaybe<Scalars['String']['input']>;
-  /** All values containing the given string. */
-  content_contains?: InputMaybe<Scalars['String']['input']>;
-  /** All values ending with the given string. */
-  content_ends_with?: InputMaybe<Scalars['String']['input']>;
-  /** All values that are contained in given list. */
-  content_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** Any other value that exists and is not equal to the given value. */
-  content_not?: InputMaybe<Scalars['String']['input']>;
-  /** All values not containing the given string. */
-  content_not_contains?: InputMaybe<Scalars['String']['input']>;
-  /** All values not ending with the given string */
-  content_not_ends_with?: InputMaybe<Scalars['String']['input']>;
-  /** All values that are not contained in given list. */
-  content_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** All values not starting with the given string. */
-  content_not_starts_with?: InputMaybe<Scalars['String']['input']>;
-  /** All values starting with the given string. */
-  content_starts_with?: InputMaybe<Scalars['String']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   /** All values greater than the given value. */
   createdAt_gt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -4468,6 +4524,25 @@ export type LearningResourceWhereInput = {
   documentInStages_every?: InputMaybe<LearningResourceWhereStageInput>;
   documentInStages_none?: InputMaybe<LearningResourceWhereStageInput>;
   documentInStages_some?: InputMaybe<LearningResourceWhereStageInput>;
+  hubspotFormId?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  hubspotFormId_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  hubspotFormId_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  hubspotFormId_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  hubspotFormId_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  hubspotFormId_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  hubspotFormId_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  hubspotFormId_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  hubspotFormId_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  hubspotFormId_starts_with?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['ID']['input']>;
   /** All values containing the given string. */
   id_contains?: InputMaybe<Scalars['ID']['input']>;
@@ -8846,7 +8921,7 @@ export type BlogsQueryVariables = Exact<{
 }>;
 
 
-export type BlogsQuery = { blogs: Array<{ id: string, title: string, slug: string, publishedAt?: string | null, content: { html: string }, image?: { url: string, fileName: string, mimeType?: string | null, width?: number | null, height?: number | null, handle: string } | null }> };
+export type BlogsQuery = { blogs: Array<{ id: string, title: string, slug: string, publishedAt?: string | null, content: { html: string }, image?: { url: string, fileName: string, mimeType?: string | null, width?: number | null, height?: number | null, handle: string } | null }>, blogsConnection: { aggregate: { count: number } } };
 
 export type BlogPostBySlugQueryVariables = Exact<{
   slug: Scalars['String']['input'];
