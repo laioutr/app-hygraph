@@ -1,5 +1,14 @@
 import { Locale } from '../generated/graphql';
 
+const getMatchingLocales = (locale: string): string[] => {
+  const validLocales = Object.values(Locale) as string[];
+  return locale
+    .replace('_', '-')
+    .split('-')
+    .map((val) => val.toLowerCase())
+    .filter((val) => validLocales.includes(val));
+};
+
 /**
  * Build the Hygraph `locales` argument from the request's clientEnv locale.
  *
@@ -10,11 +19,9 @@ import { Locale } from '../generated/graphql';
  * is added.
  */
 export const resolveHygraphLocales = (clientLocale: string): Locale[] => {
-  const requested = clientLocale as Locale;
-
-  if (requested === Locale.En) {
+  const matchingLocales = getMatchingLocales(clientLocale);
+  if (matchingLocales.length === 0) {
     return [Locale.En];
   }
-
-  return [requested, Locale.En];
+  return [...matchingLocales, Locale.En] as Locale[];
 };
