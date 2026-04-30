@@ -8918,6 +8918,7 @@ export type BlogsQueryVariables = Exact<{
   skip?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   collectionId?: InputMaybe<Scalars['ID']['input']>;
+  locales: Array<Locale> | Locale;
 }>;
 
 
@@ -8925,6 +8926,7 @@ export type BlogsQuery = { blogs: Array<{ id: string, title: string, slug: strin
 
 export type BlogPostBySlugQueryVariables = Exact<{
   slug: Scalars['String']['input'];
+  locales: Array<Locale> | Locale;
 }>;
 
 
@@ -8932,12 +8934,15 @@ export type BlogPostBySlugQuery = { blog?: { id: string, title: string, slug: st
 
 export type BlogCollectionBySlugQueryVariables = Exact<{
   slug: Scalars['String']['input'];
+  locales: Array<Locale> | Locale;
 }>;
 
 
 export type BlogCollectionBySlugQuery = { blogCollection?: { id: string, slug: string, title: string } | null };
 
-export type BlogCollectionsQueryVariables = Exact<{ [key: string]: never; }>;
+export type BlogCollectionsQueryVariables = Exact<{
+  locales: Array<Locale> | Locale;
+}>;
 
 
 export type BlogCollectionsQuery = { blogCollections: Array<{ slug: string, title: string }> };

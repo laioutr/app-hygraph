@@ -2,17 +2,21 @@ import { BlogCollectionPostsLink } from '@laioutr-core/canonical-types/blog';
 import type { BlogsQuery } from '../../generated/graphql';
 import { blogPostsToken } from '../../const/passthroughTokens';
 import { defineHygraph } from '../../middleware/defineHygraph';
+import { resolveHygraphLocales } from '../../hygraph-utils/locale';
 import { BLOGS_QUERY } from '../../queries/blog';
 
 export default defineHygraph.linkHandler({
   implements: BlogCollectionPostsLink,
-  run: async ({ context, entityIds, pagination, passthrough }) => {
+  run: async ({ context, entityIds, pagination, passthrough, clientEnv }) => {
+    const locales = resolveHygraphLocales(clientEnv.locale);
+
     const results = await Promise.all(
       entityIds.map((id) =>
         context.hygraph.request<BlogsQuery>(BLOGS_QUERY, {
           skip: pagination.offset,
           first: pagination.limit,
           collectionId: id,
+          locales,
         })
       )
     );
