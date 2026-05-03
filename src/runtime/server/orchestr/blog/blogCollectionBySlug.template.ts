@@ -1,7 +1,7 @@
 import { BlogCollectionBySlug } from '@laioutr-core/canonical-types/blog';
 import type { BlogCollectionsQuery } from '../../generated/graphql';
-import { defineHygraph } from '../../middleware/defineHygraph';
 import { resolveHygraphLocales } from '../../hygraph-utils/locale';
+import { defineHygraph } from '../../middleware/defineHygraph';
 import { BLOG_COLLECTIONS_QUERY } from '../../queries/blog';
 
 export default defineHygraph.queryTemplateProvider({

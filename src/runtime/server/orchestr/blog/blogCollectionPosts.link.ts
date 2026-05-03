@@ -1,8 +1,8 @@
 import { BlogCollectionPostsLink } from '@laioutr-core/canonical-types/blog';
 import type { BlogsQuery } from '../../generated/graphql';
 import { blogPostsToken } from '../../const/passthroughTokens';
-import { defineHygraph } from '../../middleware/defineHygraph';
 import { resolveHygraphLocales } from '../../hygraph-utils/locale';
+import { defineHygraph } from '../../middleware/defineHygraph';
 import { BLOGS_QUERY } from '../../queries/blog';
 
 export default defineHygraph.linkHandler({

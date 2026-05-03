@@ -1,8 +1,8 @@
 import { BlogPostBySlug, BlogPostBySlugNotFoundError } from '@laioutr-core/canonical-types/blog';
 import type { BlogPostBySlugQuery } from '../../generated/graphql';
 import { blogPostsToken } from '../../const/passthroughTokens';
-import { defineHygraph } from '../../middleware/defineHygraph';
 import { resolveHygraphLocales } from '../../hygraph-utils/locale';
+import { defineHygraph } from '../../middleware/defineHygraph';
 import { BLOG_POST_BY_SLUG_QUERY } from '../../queries/blog';
 
 export default defineHygraph.queryHandler({
