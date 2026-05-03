@@ -1,6 +1,24 @@
 # Changelog
 
 
+## v1.6.0
+
+[compare changes](https://undefined/undefined/compare/v1.5.0...v1.6.0)
+
+### 🚀 Enhancements
+
+- Forward request locale to Hygraph blog queries (1f4b3a3)
+
+### 🩹 Fixes
+
+- Fall back to en when requested locale is unknown (af1f886)
+- Lint issues (6b18499)
+
+### ❤️ Contributors
+
+- Sebastian Langer <sebastian.langer@laioutr.com>
+- Marcel Thiesies <marcel.thiesies@me.com>
+
 ## v1.5.0
 
 [compare changes](https://undefined/undefined/compare/v1.4.0...v1.5.0)
