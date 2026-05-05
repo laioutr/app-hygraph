@@ -1,8 +1,27 @@
 import { AssetFragment } from './asset';
 
+const BlogTaxonomyFragment = /* GraphQL */ `
+  #graphql
+  fragment BlogTaxonomy on Blog {
+    topics {
+      slug
+      title
+    }
+    formats {
+      slug
+      title
+    }
+    audiences {
+      slug
+      title
+    }
+  }
+`;
+
 const BlogFragment = /* GraphQL */ `
   #graphql
   ${AssetFragment}
+  ${BlogTaxonomyFragment}
   fragment Blog on Blog {
     id
     title
@@ -14,6 +33,7 @@ const BlogFragment = /* GraphQL */ `
       ...Asset
     }
     publishedAt
+    ...BlogTaxonomy
   }
 `;
 
@@ -28,6 +48,58 @@ export const BLOGS_QUERY = /* GraphQL */ `
       aggregate {
         count
       }
+    }
+  }
+`;
+
+export const BLOG_LISTING_QUERY = /* GraphQL */ `
+  #graphql
+  ${BlogFragment}
+  query BlogListing(
+    $first: Int = 24
+    $skip: Int = 0
+    $orderBy: BlogOrderByInput = publishedAt_DESC
+    $where: BlogWhereInput
+  ) {
+    blogs(first: $first, skip: $skip, orderBy: $orderBy, where: $where) {
+      ...Blog
+    }
+    blogsConnection(where: $where) {
+      aggregate {
+        count
+      }
+    }
+  }
+`;
+
+export const BLOG_TAXONOMIES_QUERY = /* GraphQL */ `
+  #graphql
+  query BlogTaxonomies {
+    topics(first: 100, orderBy: title_ASC) {
+      slug
+      title
+    }
+    formats(first: 50, orderBy: title_ASC) {
+      slug
+      title
+    }
+    audiences(first: 50, orderBy: title_ASC) {
+      slug
+      title
+    }
+  }
+`;
+
+export const RELATED_BLOGS_QUERY = /* GraphQL */ `
+  #graphql
+  ${BlogFragment}
+  query RelatedBlogs($topicSlug: String!, $excludeSlug: String!, $first: Int = 4) {
+    blogs(
+      first: $first
+      orderBy: publishedAt_DESC
+      where: { topics_some: { slug: $topicSlug }, slug_not: $excludeSlug }
+    ) {
+      ...Blog
     }
   }
 `;
