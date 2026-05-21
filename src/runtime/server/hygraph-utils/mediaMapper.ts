@@ -29,6 +29,7 @@ export const mapHygraphMedia = (asset: HygraphAsset): Media => {
           format: mimeType.slice('video/'.length),
         },
       ],
+      alt: filenameToAlt(asset.fileName),
     };
   }
   return {
