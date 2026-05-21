@@ -1,6 +1,20 @@
 # Changelog
 
 
+## v1.6.1
+
+[compare changes](https://undefined/undefined/compare/v1.6.0...v1.6.1)
+
+### 🩹 Fixes
+
+- Pass through hygraph media type correctly (b4e5e9e)
+- Auto-generate video-alt from hygraph filename (aecf890)
+
+### ❤️ Contributors
+
+- Sebastian Langer ([@screeny05](https://github.com/screeny05))
+- Patrick Bug <patrick.bug@datrycs.com>
+
 ## v1.6.0
 
 [compare changes](https://undefined/undefined/compare/v1.5.0...v1.6.0)
