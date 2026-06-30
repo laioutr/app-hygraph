@@ -1,4 +1,4 @@
-import { BlogPostBase, BlogPostContent, BlogPostExcerpt, BlogPostMedia } from '@laioutr-core/canonical-types/entity/blog-post';
+import { BlogPostBase, BlogPostContent, BlogPostExcerpt, BlogPostMedia, BlogPostSeo } from '@laioutr-core/canonical-types/entity/blog-post';
 import { blogPostsToken } from '../../const/passthroughTokens';
 import { mapHygraphMedia } from '../../hygraph-utils/mediaMapper';
 import { defineHygraph } from '../../middleware/defineHygraph';
@@ -6,7 +6,7 @@ import { defineHygraph } from '../../middleware/defineHygraph';
 export default defineHygraph.componentResolver({
   entityType: 'BlogPost',
   label: 'Blog Post',
-  provides: [BlogPostBase, BlogPostExcerpt, BlogPostContent, BlogPostMedia],
+  provides: [BlogPostBase, BlogPostExcerpt, BlogPostContent, BlogPostMedia, BlogPostSeo],
   resolve: async ({ passthrough, $entity }) => {
     const posts = passthrough.require(blogPostsToken);
 
@@ -33,6 +33,10 @@ export default defineHygraph.componentResolver({
           media: {
             image:
               post.image ? mapHygraphMedia(post.image) : { type: 'image', sources: [{ provider: 'none', src: '/placeholders/1x1.svg' }] },
+          },
+          seo: {
+            title: post.metaTitle ?? undefined,
+            description: post.metaDescription ?? undefined,
           },
         })
       ),
