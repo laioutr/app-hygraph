@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.7.0
+
+[compare changes](https://undefined/undefined/compare/v1.6.1...v1.7.0)
+
+### 🚀 Enhancements
+
+- Provide BlogPostSeo from Blog metaTitle/metaDescription (2c7d719)
+
+### ❤️ Contributors
+
+- Marcel Thiesies <marcel.thiesies@me.com>
+
 ## v1.6.1
 
 [compare changes](https://undefined/undefined/compare/v1.6.0...v1.6.1)
