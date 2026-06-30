@@ -8912,7 +8912,7 @@ export type TopicsUsedFor_9aay5WhereUniqueInput = {
 
 export type AssetFragment = { url: string, fileName: string, mimeType?: string | null, width?: number | null, height?: number | null, handle: string };
 
-export type BlogFragment = { id: string, title: string, slug: string, publishedAt?: string | null, content: { html: string }, image?: { url: string, fileName: string, mimeType?: string | null, width?: number | null, height?: number | null, handle: string } | null };
+export type BlogFragment = { id: string, title: string, slug: string, publishedAt?: string | null, metaTitle?: string | null, metaDescription?: string | null, content: { html: string }, image?: { url: string, fileName: string, mimeType?: string | null, width?: number | null, height?: number | null, handle: string } | null };
 
 export type BlogsQueryVariables = Exact<{
   skip?: InputMaybe<Scalars['Int']['input']>;

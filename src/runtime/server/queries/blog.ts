@@ -14,6 +14,8 @@ const BlogFragment = /* GraphQL */ `
       ...Asset
     }
     publishedAt
+    metaTitle
+    metaDescription
   }
 `;
 
