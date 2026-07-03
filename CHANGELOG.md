@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.7.1
+
+[compare changes](https://undefined/undefined/compare/v1.7.0...v1.7.1)
+
+### 🩹 Fixes
+
+- Use full mimetype for video assets (4c6b329)
+
+### ❤️ Contributors
+
+- Sebastian Langer <sebastian.langer@laioutr.com>
+
 ## v1.7.0
 
 [compare changes](https://undefined/undefined/compare/v1.6.1...v1.7.0)
