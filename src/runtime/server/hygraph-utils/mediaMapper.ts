@@ -26,7 +26,8 @@ export const mapHygraphMedia = (asset: HygraphAsset): Media => {
           src: asset.url,
           width: asset.width ?? undefined,
           height: asset.height ?? undefined,
-          format: mimeType.slice('video/'.length),
+          // Full MIME type (e.g. `video/mp4`) — the frontend binds this to `<source type>`.
+          format: mimeType,
         },
       ],
       alt: filenameToAlt(asset.fileName),
