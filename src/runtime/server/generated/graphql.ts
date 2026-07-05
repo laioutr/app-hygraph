@@ -8947,6 +8947,31 @@ export type BlogCollectionsQueryVariables = Exact<{
 
 export type BlogCollectionsQuery = { blogCollections: Array<{ slug: string, title: string }> };
 
+export type BlogsByTopicQueryVariables = Exact<{
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  topicId?: InputMaybe<Scalars['ID']['input']>;
+  locales: Array<Locale> | Locale;
+}>;
+
+
+export type BlogsByTopicQuery = { blogs: Array<{ id: string, title: string, slug: string, publishedAt?: string | null, content: { html: string }, image?: { url: string, fileName: string, mimeType?: string | null, width?: number | null, height?: number | null, handle: string } | null }>, blogsConnection: { aggregate: { count: number } } };
+
+export type BlogTopicBySlugQueryVariables = Exact<{
+  slug: Scalars['String']['input'];
+  locales: Array<Locale> | Locale;
+}>;
+
+
+export type BlogTopicBySlugQuery = { topic?: { id: string, slug: string, title: string } | null };
+
+export type BlogTopicsQueryVariables = Exact<{
+  locales: Array<Locale> | Locale;
+}>;
+
+
+export type BlogTopicsQuery = { topics: Array<{ slug: string, title: string }> };
+
 export type MediaLibraryListQueryVariables = Exact<{
   skip?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;

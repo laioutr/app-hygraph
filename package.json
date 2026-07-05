@@ -86,7 +86,7 @@
   },
   "peerDependencies": {
     "@graphql-codegen/cli": "^6.0.0",
-    "@laioutr-core/canonical-types": ">=0.22.13",
+    "@laioutr-core/canonical-types": ">=0.23.4",
     "@laioutr-core/core-types": ">=0.28.11",
     "@laioutr-core/frontend-core": ">=0.28.11",
     "@laioutr-core/kit": ">=0.28.11",
