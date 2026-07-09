@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.9.0
+
+[compare changes](https://undefined/undefined/compare/v1.8.0...v1.9.0)
+
+### 🚀 Enhancements
+
+- Load up to 100 topics in topic template and enable search (c3bfb01)
+
+### ❤️ Contributors
+
+- Sebastian Langer <sebastian.langer@laioutr.com>
+
 ## v1.8.0
 
 [compare changes](https://undefined/undefined/compare/v1.7.2...v1.8.0)
