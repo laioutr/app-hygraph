@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.7.2
+
+[compare changes](https://undefined/undefined/compare/v1.7.1...v1.7.2)
+
+### 🩹 Fixes
+
+- Blog-topic tokens (0719281)
+
+### ❤️ Contributors
+
+- Sebastian Langer <sebastian.langer@laioutr.com>
+
 ## v1.7.1
 
 [compare changes](https://undefined/undefined/compare/v1.7.0...v1.7.1)
