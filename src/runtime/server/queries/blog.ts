@@ -40,6 +40,27 @@ export const BLOGS_QUERY = /* GraphQL */ `
   }
 `;
 
+export const BLOGS_BY_TOPIC_QUERY = /* GraphQL */ `
+  #graphql
+  ${BlogFragment}
+  query BlogsByTopic($skip: Int, $first: Int, $topicId: ID, $locales: [Locale!]!) {
+    blogs(
+      skip: $skip
+      first: $first
+      orderBy: createdAt_DESC
+      where: { topics_some: { id: $topicId } }
+      locales: $locales
+    ) {
+      ...Blog
+    }
+    blogsConnection(where: { topics_some: { id: $topicId } }, locales: $locales) {
+      aggregate {
+        count
+      }
+    }
+  }
+`;
+
 export const BLOG_POST_BY_SLUG_QUERY = /* GraphQL */ `
   #graphql
   ${BlogFragment}
@@ -65,6 +86,27 @@ export const BLOG_COLLECTIONS_QUERY = /* GraphQL */ `
   #graphql
   query BlogCollections($locales: [Locale!]!) {
     blogCollections(locales: $locales) {
+      slug
+      title
+    }
+  }
+`;
+
+export const BLOG_TOPIC_BY_SLUG_QUERY = /* GraphQL */ `
+  #graphql
+  query BlogTopicBySlug($slug: String!, $locales: [Locale!]!) {
+    topic(where: { slug: $slug }, locales: $locales) {
+      id
+      slug
+      title
+    }
+  }
+`;
+
+export const BLOG_TOPICS_QUERY = /* GraphQL */ `
+  #graphql
+  query BlogTopics($locales: [Locale!]!) {
+    topics(locales: $locales) {
       slug
       title
     }
