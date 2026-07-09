@@ -5,6 +5,14 @@ import { resolveHygraphLocales } from '../../hygraph-utils/locale';
 import { defineHygraph } from '../../middleware/defineHygraph';
 import { BLOGS_BY_TOPIC_QUERY, BLOGS_QUERY } from '../../queries/blog';
 
+// Hygraph caps `first` at 100. Topic listings are exposed through the shared
+// blog-collection section, whose pagination is tuned for collection widgets
+// (small page size — 10/12). A topic page instead wants to show all of its
+// posts, so decouple it from that page size and fetch up to the Hygraph
+// maximum in a single request. Beyond 100 posts per topic we'd need real
+// pagination (offset/limit + a load-more UI) rather than a higher limit.
+const HYGRAPH_MAX_FIRST = 100;
+
 export default defineHygraph.linkHandler({
   implements: BlogCollectionPostsLink,
   run: async ({ context, entityIds, pagination, passthrough, clientEnv }) => {
@@ -18,7 +26,7 @@ export default defineHygraph.linkHandler({
         topicSourceIds?.has(id) ?
           context.hygraph.request<BlogsByTopicQuery>(BLOGS_BY_TOPIC_QUERY, {
             skip: pagination.offset,
-            first: pagination.limit,
+            first: HYGRAPH_MAX_FIRST,
             topicId: id,
             locales,
           })
