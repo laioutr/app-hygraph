@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.8.0
+
+[compare changes](https://undefined/undefined/compare/v1.7.2...v1.8.0)
+
+### 🚀 Enhancements
+
+- Expose blog posts by topic as a BlogCollection query (691e3c9)
+
+### ❤️ Contributors
+
+- Marcel Thiesies <marcel.thiesies@me.com>
+
 ## v1.7.2
 
 [compare changes](https://undefined/undefined/compare/v1.7.1...v1.7.2)
