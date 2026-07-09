@@ -13912,6 +13912,8 @@ export type BlogTopicBySlugQuery = { topic?: { id: string, slug?: string | null,
 
 export type BlogTopicsQueryVariables = Exact<{
   locales: Array<Locale> | Locale;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<TopicWhereInput>;
 }>;
 
 

@@ -105,8 +105,8 @@ export const BLOG_TOPIC_BY_SLUG_QUERY = /* GraphQL */ `
 
 export const BLOG_TOPICS_QUERY = /* GraphQL */ `
   #graphql
-  query BlogTopics($locales: [Locale!]!) {
-    topics(locales: $locales) {
+  query BlogTopics($locales: [Locale!]!, $first: Int, $where: TopicWhereInput) {
+    topics(locales: $locales, first: $first, where: $where) {
       slug
       title
     }
