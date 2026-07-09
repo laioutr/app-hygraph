@@ -1,4 +1,4 @@
-import { BlogTopicBase } from '@laioutr-core/canonical-types/entity/blog-topic';
+import { BlogTopicBase } from '../../../shared/tokens/blog-topic';
 import { blogTopicToken } from '../../const/passthroughTokens';
 import { defineHygraph } from '../../middleware/defineHygraph';
 

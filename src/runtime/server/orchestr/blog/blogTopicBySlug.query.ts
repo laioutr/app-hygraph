@@ -1,5 +1,5 @@
-import { BlogTopicBySlug, BlogTopicBySlugNotFoundError } from '@laioutr-core/canonical-types/blog';
 import type { BlogTopicBySlugQuery } from '../../generated/graphql';
+import { BlogTopicBySlug, BlogTopicBySlugNotFoundError } from '../../../shared/tokens/blog-topic';
 import { blogTopicToken } from '../../const/passthroughTokens';
 import { resolveHygraphLocales } from '../../hygraph-utils/locale';
 import { defineHygraph } from '../../middleware/defineHygraph';

@@ -1,5 +1,5 @@
-import { BlogTopicPostsLink } from '@laioutr-core/canonical-types/blog';
 import type { BlogsByTopicQuery } from '../../generated/graphql';
+import { BlogTopicPostsLink } from '../../../shared/tokens/blog-topic';
 import { blogPostsToken } from '../../const/passthroughTokens';
 import { resolveHygraphLocales } from '../../hygraph-utils/locale';
 import { defineHygraph } from '../../middleware/defineHygraph';
