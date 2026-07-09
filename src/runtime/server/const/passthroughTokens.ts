@@ -1,9 +1,14 @@
 import { createPassthroughToken } from '#imports';
-import type { BlogCollectionBySlugQuery, BlogFragment, BlogTopicBySlugQuery } from '../generated/graphql';
+import type { BlogCollectionBySlugQuery, BlogFragment } from '../generated/graphql';
 
 type BlogCollection = NonNullable<BlogCollectionBySlugQuery['blogCollection']>;
-type BlogTopic = NonNullable<BlogTopicBySlugQuery['topic']>;
 
 export const blogCollectionToken = createPassthroughToken<BlogCollection>('hygraph/blog-collection');
-export const blogTopicToken = createPassthroughToken<BlogTopic>('hygraph/blog-topic');
 export const blogPostsToken = createPassthroughToken<BlogFragment[]>('hygraph/blog-posts');
+
+/**
+ * Ids that the `blog/collection/posts` link should resolve via the topic
+ * relation (`topics_some`) instead of the blog-collection relation. Set by the
+ * "Blog Posts by Topic" query, which exposes a topic as a BlogCollection entity.
+ */
+export const blogPostsTopicSourceToken = createPassthroughToken<Set<string>>('hygraph/blog-posts-topic-source');
