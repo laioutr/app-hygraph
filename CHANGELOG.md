@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.9.1
+
+[compare changes](https://undefined/undefined/compare/v1.9.0...v1.9.1)
+
+### 🩹 Fixes
+
+- Blog-collection seo component, media v2 connector (6f2a693)
+
+### ❤️ Contributors
+
+- Sebastian Langer <sebastian.langer@laioutr.com>
+
 ## v1.9.0
 
 [compare changes](https://undefined/undefined/compare/v1.8.0...v1.9.0)
