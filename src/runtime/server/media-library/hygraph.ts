@@ -15,7 +15,8 @@ export default defineMediaLibraryProvider({
     const result = await client.request<MediaLibraryListQuery>(MEDIA_LIBRARY_LIST_QUERY, {
       skip: offset,
       first: limit,
-      search,
+      // Only constrain by `_search` when a term is present; an empty filter lists all assets (browse).
+      where: search ? { _search: search } : {},
     });
 
     const items = result.data.assets.map(

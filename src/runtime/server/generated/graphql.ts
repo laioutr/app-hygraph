@@ -6190,6 +6190,7 @@ export type Glossary = Entity & Node & {
   /** Get the other localizations for this document */
   localizations: Array<Glossary>;
   metaDescription?: Maybe<Scalars['String']['output']>;
+  metaKeywords?: Maybe<Scalars['String']['output']>;
   metaTitle?: Maybe<Scalars['String']['output']>;
   /** The time the document was published. Null on documents in draft stage. */
   publishedAt?: Maybe<Scalars['DateTime']['output']>;
@@ -6319,6 +6320,8 @@ export type GlossaryCreateInput = {
   localizations?: InputMaybe<GlossaryCreateLocalizationsInput>;
   /** metaDescription input for default locale (en) */
   metaDescription?: InputMaybe<Scalars['String']['input']>;
+  /** metaKeywords input for default locale (en) */
+  metaKeywords?: InputMaybe<Scalars['String']['input']>;
   /** metaTitle input for default locale (en) */
   metaTitle?: InputMaybe<Scalars['String']['input']>;
   slug: Scalars['String']['input'];
@@ -6331,6 +6334,7 @@ export type GlossaryCreateLocalizationDataInput = {
   content: Scalars['RichTextAST']['input'];
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   metaDescription?: InputMaybe<Scalars['String']['input']>;
+  metaKeywords?: InputMaybe<Scalars['String']['input']>;
   metaTitle?: InputMaybe<Scalars['String']['input']>;
   title: Scalars['String']['input'];
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -6480,6 +6484,8 @@ export enum GlossaryOrderByInput {
   IdDesc = 'id_DESC',
   MetaDescriptionAsc = 'metaDescription_ASC',
   MetaDescriptionDesc = 'metaDescription_DESC',
+  MetaKeywordsAsc = 'metaKeywords_ASC',
+  MetaKeywordsDesc = 'metaKeywords_DESC',
   MetaTitleAsc = 'metaTitle_ASC',
   MetaTitleDesc = 'metaTitle_DESC',
   PublishedAtAsc = 'publishedAt_ASC',
@@ -6499,6 +6505,8 @@ export type GlossaryUpdateInput = {
   localizations?: InputMaybe<GlossaryUpdateLocalizationsInput>;
   /** metaDescription input for default locale (en) */
   metaDescription?: InputMaybe<Scalars['String']['input']>;
+  /** metaKeywords input for default locale (en) */
+  metaKeywords?: InputMaybe<Scalars['String']['input']>;
   /** metaTitle input for default locale (en) */
   metaTitle?: InputMaybe<Scalars['String']['input']>;
   slug?: InputMaybe<Scalars['String']['input']>;
@@ -6509,6 +6517,7 @@ export type GlossaryUpdateInput = {
 export type GlossaryUpdateLocalizationDataInput = {
   content?: InputMaybe<Scalars['RichTextAST']['input']>;
   metaDescription?: InputMaybe<Scalars['String']['input']>;
+  metaKeywords?: InputMaybe<Scalars['String']['input']>;
   metaTitle?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
 };
@@ -6552,6 +6561,8 @@ export type GlossaryUpdateManyInput = {
   localizations?: InputMaybe<GlossaryUpdateManyLocalizationsInput>;
   /** metaDescription input for default locale (en) */
   metaDescription?: InputMaybe<Scalars['String']['input']>;
+  /** metaKeywords input for default locale (en) */
+  metaKeywords?: InputMaybe<Scalars['String']['input']>;
   /** metaTitle input for default locale (en) */
   metaTitle?: InputMaybe<Scalars['String']['input']>;
   /** title input for default locale (en) */
@@ -6561,6 +6572,7 @@ export type GlossaryUpdateManyInput = {
 export type GlossaryUpdateManyLocalizationDataInput = {
   content?: InputMaybe<Scalars['RichTextAST']['input']>;
   metaDescription?: InputMaybe<Scalars['String']['input']>;
+  metaKeywords?: InputMaybe<Scalars['String']['input']>;
   metaTitle?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
 };
@@ -6697,6 +6709,25 @@ export type GlossaryWhereInput = {
   metaDescription_not_starts_with?: InputMaybe<Scalars['String']['input']>;
   /** All values starting with the given string. */
   metaDescription_starts_with?: InputMaybe<Scalars['String']['input']>;
+  metaKeywords?: InputMaybe<Scalars['String']['input']>;
+  /** All values containing the given string. */
+  metaKeywords_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values ending with the given string. */
+  metaKeywords_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are contained in given list. */
+  metaKeywords_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Any other value that exists and is not equal to the given value. */
+  metaKeywords_not?: InputMaybe<Scalars['String']['input']>;
+  /** All values not containing the given string. */
+  metaKeywords_not_contains?: InputMaybe<Scalars['String']['input']>;
+  /** All values not ending with the given string */
+  metaKeywords_not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values that are not contained in given list. */
+  metaKeywords_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** All values not starting with the given string. */
+  metaKeywords_not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  /** All values starting with the given string. */
+  metaKeywords_starts_with?: InputMaybe<Scalars['String']['input']>;
   metaTitle?: InputMaybe<Scalars['String']['input']>;
   /** All values containing the given string. */
   metaTitle_contains?: InputMaybe<Scalars['String']['input']>;
@@ -8269,6 +8300,7 @@ export enum Locale {
   De = 'de',
   /** System locale */
   En = 'en',
+  Es = 'es',
   Fr = 'fr'
 }
 
@@ -13922,7 +13954,7 @@ export type BlogTopicsQuery = { topics: Array<{ slug?: string | null, title?: st
 export type MediaLibraryListQueryVariables = Exact<{
   skip?: InputMaybe<Scalars['Int']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
-  search?: InputMaybe<Scalars['String']['input']>;
+  where?: InputMaybe<AssetWhereInput>;
 }>;
 
 

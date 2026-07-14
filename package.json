@@ -87,9 +87,9 @@
   "peerDependencies": {
     "@graphql-codegen/cli": "^6.0.0",
     "@laioutr-core/canonical-types": ">=0.25.0",
-    "@laioutr-core/core-types": ">=0.33.1",
-    "@laioutr-core/frontend-core": ">=0.33.1",
-    "@laioutr-core/kit": ">=0.33.1",
+    "@laioutr-core/core-types": ">=0.35.0",
+    "@laioutr-core/frontend-core": ">=0.35.0",
+    "@laioutr-core/kit": ">=0.35.0",
     "graphql": "^16.0.0"
   },
   "peerDependenciesMeta": {
