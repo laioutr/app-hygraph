@@ -59,19 +59,26 @@ describe('hygraphClientFactory stage selection', () => {
     expect(fetchMock.mock.calls[0][0]).toBe('https://api.test/content');
   });
 
-  // Fail soft: a misconfigured connector must serve published content, never
-  // `Authorization: Bearer undefined`.
-  it('degrades to published when preview is requested but previewToken is missing', async () => {
+  // Fail soft: `previewToken` is optional, so a misconfigured connector must serve published
+  // content, never `Authorization: Bearer undefined` and never a Draft-stage query on a blank
+  // credential. Absent, empty and whitespace-only must all mean "no preview" — there is no
+  // partially-configured state in between.
+  it.each([
+    ['absent', undefined],
+    ['empty', ''],
+    ['whitespace-only', '   '],
+  ])('cannot reach Stage.Draft when previewToken is %s', async (_label, previewToken) => {
     const fetchMock = vi.fn().mockResolvedValue({ json: async () => ({ data: {} }) });
     vi.stubGlobal('fetch', fetchMock);
     const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
-    await hygraphClientFactory({ ...config, previewToken: undefined }, { isPreview: true }).request('query Q { x }');
+    await hygraphClientFactory({ ...config, previewToken }, { isPreview: true }).request('query Q { x }');
 
     const [url, init] = fetchMock.mock.calls[0];
     expect(url).toBe('https://api.test/content');
     expect(init.headers.Authorization).toBe('Bearer published-token');
     expect(JSON.parse(init.body).variables.stage).toBe('PUBLISHED');
+    expect(JSON.parse(init.body).variables.stage).not.toBe('DRAFT');
     expect(warnSpy).toHaveBeenCalled();
   });
 
