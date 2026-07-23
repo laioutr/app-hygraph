@@ -8,4 +8,6 @@ export const defineHygraph = (defineOrchestr as typeof defineOrchestrMock)
     logoUrl: '/app-hygraph/logo.svg',
     label: 'Hygraph',
   })
-  .extendRequest(async () => ({ context: { hygraph: hygraphClientFactory() } }));
+  .extendRequest(async ({ clientEnv }) => ({
+    context: { hygraph: hygraphClientFactory(undefined, { isPreview: clientEnv.isPreview }) },
+  }));

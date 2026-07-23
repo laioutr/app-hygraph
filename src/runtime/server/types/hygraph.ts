@@ -10,6 +10,10 @@ export interface HygraphAsset {
 export interface HygraphClientConfig {
   contentApiUrl: string;
   token: string;
+  /** PAT with Draft-stage read permission. Separate from `token` so published reads keep a least-privileged credential. */
+  previewToken: string;
+  /** Optional. Hygraph's Content API serves both stages; only needed if a project observes CDN staleness on drafts. */
+  previewApiUrl?: string;
 }
 
 export interface HygraphResponse<TData> {
