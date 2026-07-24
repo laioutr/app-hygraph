@@ -1,6 +1,26 @@
 # Changelog
 
 
+## v1.10.0
+
+[compare changes](https://undefined/undefined/compare/v1.9.1...v1.10.0)
+
+### 🚀 Enhancements
+
+- Query Hygraph's Draft stage when clientEnv.isPreview is set (5e0371d)
+
+### 🩹 Fixes
+
+- Make previewToken optional and treat blank values as absent (5e00c4f)
+
+### 📖 Documentation
+
+- Document preview/draft config and behavior (9ca7e66)
+
+### ❤️ Contributors
+
+- Sebastian Langer <sebastian.langer@laioutr.com>
+
 ## v1.9.1
 
 [compare changes](https://undefined/undefined/compare/v1.9.0...v1.9.1)
