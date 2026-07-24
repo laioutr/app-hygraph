@@ -24,6 +24,10 @@ Other Laioutr apps that also talk to Hygraph can import the client, middleware, 
 
 The module also includes a demo blog implementation with orchestr-handlers for blog content: query handlers and query template providers for blog collections and posts, link handlers for connecting posts to collections, and component resolvers for rendering both.
 
+### Content Preview
+
+When a request is marked as a preview (`clientEnv.isPreview`, set by Laioutr's content-preview gate), the connector reads Hygraph's **Draft** stage instead of **Published**, so editors see unpublished changes. This requires a [`previewToken`](#configuration) with Draft-stage permission; without one the connector fails soft and keeps serving published content.
+
 ## Configuration
 
 Add the module to your `nuxt.config.ts` and provide your Hygraph credentials:
@@ -44,6 +48,8 @@ export default defineNuxtConfig({
 | `contentApiUrl` | Hygraph Content API endpoint                                                                                                                                                                                                                                                                                   |
 | `imageBaseUrl`  | Hygraph image CDN base URL (used by [`@nuxt/image`](https://image.nuxt.com/providers/hygraph)). Region-specific; find yours by querying `{ assets(first: 1) { url } }` against your Content API and taking the domain + first path-segment, e.g. `https://eu-west-2.graphassets.com/cmh4jxx7w1fce07l80dils2d1` |
 | `token`         | Permanent auth token for the Content API                                                                                                                                                                                                                                                                       |
+| `previewToken`  | Optional. Separate PAT with Draft-stage read permission, used only for preview requests. Kept distinct from `token` so published reads keep a least-privileged credential. Without it the connector always serves published content, even for requests marked as preview.                                        |
+| `previewApiUrl` | Optional. Alternate Content API endpoint for preview (Draft) reads. Hygraph's Content API already serves both stages, so this is only needed if a project observes CDN staleness on drafts.                                                                                                                      |
 
 ## Exports
 
@@ -132,6 +138,7 @@ npx @laioutr/cli rc fetch -p <org-slug>/<project-slug> -s <secret-key>
 export HYGRAPH_CONTENT_API_URL=<your-content-api-url>
 export HYGRAPH_TOKEN=<your-token>
 export HYGRAPH_IMAGE_BASE_URL=<your-image-base-url>
+export HYGRAPH_PREVIEW_TOKEN=<your-draft-stage-token> # optional, enables preview/draft reads
 pnpm dev
 ```
 
