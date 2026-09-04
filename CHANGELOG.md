@@ -1,6 +1,24 @@
 # Changelog
 
 
+## v1.10.1
+
+[compare changes](https://undefined/undefined/compare/v1.10.0...v1.10.1)
+
+### 🩹 Fixes
+
+- Report the real asset count to the media picker (b59eee2)
+
+### 🏡 Chore
+
+- Allow dependency builds (d92ee3a)
+- Add unbuild dev-dependency (a81a6fc)
+
+### ❤️ Contributors
+
+- Sebastian Langer <sebastian.langer@laioutr.com>
+- Marcel Thiesies <marcel.thiesies@me.com>
+
 ## v1.10.0
 
 [compare changes](https://undefined/undefined/compare/v1.9.1...v1.10.0)
