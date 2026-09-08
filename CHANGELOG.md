@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.10.2
+
+[compare changes](https://undefined/undefined/compare/v1.10.1...v1.10.2)
+
+### 🩹 Fixes
+
+- Keep videos in the media library (e70d35b)
+
+### ❤️ Contributors
+
+- Sebastian Langer <sebastian.langer@laioutr.com>
+
 ## v1.10.1
 
 [compare changes](https://undefined/undefined/compare/v1.10.0...v1.10.1)
