@@ -24,8 +24,13 @@ export const mapHygraphMedia = (asset: HygraphAsset): Media => {
         {
           provider: 'hygraph',
           src: asset.url,
-          width: asset.width ?? undefined,
-          height: asset.height ?? undefined,
+          // Hygraph extracts dimensions for images only — every video asset reports `width`/`height`
+          // as null. `MediaSourceVideo` requires both as numbers, and the media library's trust
+          // boundary drops any item that fails that schema, so `undefined` here made every video
+          // vanish from the picker. 0 is the "unknown" placeholder; nothing in the render path reads
+          // a video source's dimensions.
+          width: asset.width ?? 0,
+          height: asset.height ?? 0,
           // Full MIME type (e.g. `video/mp4`) — the frontend binds this to `<source type>`.
           format: mimeType,
         },
